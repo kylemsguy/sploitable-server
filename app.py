@@ -37,8 +37,8 @@ def login():
         return "GET is not supported on this endpoint"
 
     if request.method == 'POST':
+        print(request.data, file=sys.stderr)
         data = request.get_json(force=True, silent=True)
-        print(data, file=sys.stderr)
 
         if not data:
             # 400 Bad Request
