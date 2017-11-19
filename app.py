@@ -1,4 +1,6 @@
+import sys
 import sqlite3
+
 from sqlite3 import Error
 from flask import Flask, abort, request
 
@@ -30,11 +32,13 @@ def hello_world():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    print(request.remote_addr, file=sys.stderr)
     if request.method == 'GET':
         return "GET is not supported on this endpoint"
 
     if request.method == 'POST':
         data = request.get_json(force=True, silent=True)
+        print(data, file=sys.stderr)
 
         if not data:
             # 400 Bad Request
