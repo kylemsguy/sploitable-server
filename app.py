@@ -38,8 +38,11 @@ def login():
 
     if request.method == 'POST':
         print("data:", request.data, file=sys.stderr)
-        print("values:", request.values, file=sys.stderr)
+        print("values:", request.values.to_dict(), file=sys.stderr)
         data = request.get_json(force=True, silent=True)
+
+        if not data:
+            data = request.values.to_dict()
 
         if not data:
             # 400 Bad Request
