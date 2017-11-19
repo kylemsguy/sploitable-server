@@ -32,12 +32,13 @@ def hello_world():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    print(request.remote_addr, file=sys.stderr)
+    print("ip:", request.remote_addr, file=sys.stderr)
     if request.method == 'GET':
         return "GET is not supported on this endpoint"
 
     if request.method == 'POST':
-        print(request.data, file=sys.stderr)
+        print("data:", request.data, file=sys.stderr)
+        print("values:", request.values, file=sys.stderr)
         data = request.get_json(force=True, silent=True)
 
         if not data:
